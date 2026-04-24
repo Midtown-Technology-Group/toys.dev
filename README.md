@@ -1,29 +1,28 @@
 # Midtown Toys
 
-PowerToys-style utilities for IT MSPs.
+Small, focused utilities and supporting plumbing for Midtown's internal toy chest.
 
 ## Live Site
 
 https://toys.dev.midtowntg.com
 
-## Tools Included
+## Featured Toys
 
 | Tool | Description |
 |------|-------------|
-| Context Sync | Sync Microsoft 365 to knowledge graph |
-| SOP Generator | Screenshots to documentation |
-| Quick Capture CLI | Fast capture for Logseq |
-| GTD Dashboard CLI | Unified task view |
-| Meeting Cost Tracker | Calculate meeting costs |
-| Weekly Review | Automated GTD weekly review |
+| Todo | Windows-first Microsoft To Do companion |
+| Quick Capture | Fast capture into notes and workflows |
+| Mail Triage | Read-only inbox scanning with JSON output |
+| Calendar Glance | Read-only agenda snapshots |
+| Context Sync | Sync Microsoft 365 into a knowledge graph |
+| Shared Microsoft Auth | Reusable Windows-first Graph auth foundation |
 
-## Deploy to GitHub Pages
+## Site Notes
 
-1. Create `toys.dev` repo under Midtown-Technology-Group
-2. Copy these files to the repo
-3. Enable GitHub Pages on `main` branch, `/ (root)` folder
-4. Add CNAME file with `toys.dev.midtowntg.com`
-5. Configure DNS CNAME: `toys.dev` → `midtown-technology-group.github.io`
+- `file-finder` is currently parked as a prototype because `Files.Read` prompts for tenant consent.
+- `todo` now publishes a real MSI release into the private WinGet feed.
+- Final `winget source add` / `winget install` proof still needs an elevated client-side pass.
+- The site itself is a lightweight GitHub Pages landing page.
 
 ## Local Preview
 
@@ -33,4 +32,4 @@ python -m http.server 8000
 
 ## License
 
-Site content under MIT. Tool code under AGPL-3.0.
+Site content under MIT. Tool repositories carry their own licenses.
