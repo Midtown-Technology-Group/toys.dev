@@ -6,11 +6,15 @@
     <title>Midtown Toys | Small focused tools for Midtown workflows</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="hero">
+        <div class="hero-orb hero-orb-one"></div>
+        <div class="hero-orb hero-orb-two"></div>
         <div class="container">
+            <div class="hero-kicker">Midtown internal toy chest</div>
             <div class="logo">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="4" y="4" width="56" height="56" rx="12" stroke="currentColor" stroke-width="3"/>
@@ -22,6 +26,20 @@
             <h1>Midtown Toys</h1>
             <p class="tagline">Small, focused tools for real Midtown workflows</p>
             <p class="description">Windows-first toys, read-only Microsoft 365 helpers, and a shared auth foundation that keep onboarding compact and practical. Built for our own work first, then polished into reusable tools.</p>
+            <div class="hero-metrics">
+                <div class="metric">
+                    <span class="metric-value">6</span>
+                    <span class="metric-label">active toys</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">3</span>
+                    <span class="metric-label">live Graph helpers</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">1</span>
+                    <span class="metric-label">private feed</span>
+                </div>
+            </div>
             <div class="cta-buttons">
                 <a href="#tools" class="btn btn-primary">Explore Tools</a>
                 <a href="#install" class="btn btn-secondary">Install Notes</a>
@@ -30,6 +48,25 @@
     </header>
 
     <main>
+        <section class="status-strip">
+            <div class="container">
+                <div class="status-grid">
+                    <div class="status-card">
+                        <span class="status-label">Ready</span>
+                        <p>`todo`, `quick-capture`, `mail-triage`, and `calendar-glance` are the current operator-ready tools.</p>
+                    </div>
+                    <div class="status-card">
+                        <span class="status-label">Distribution</span>
+                        <p>`todo` is already moving through the private WinGet pilot and the vanity feed hostname is in progress.</p>
+                    </div>
+                    <div class="status-card">
+                        <span class="status-label">House Rule</span>
+                        <p>We feature tools only after the consent surface and the real operator flow are both proven.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="tools" id="tools">
             <div class="container">
                 <div class="section-header">
@@ -183,6 +220,7 @@
         <section class="install">
             <div class="container">
                 <h2>Install Notes</h2>
+                <p class="install-intro">Most toys are still easiest to run from source. Distribution is real now, but we are still being honest about what is polished versus merely promising.</p>
                 <div class="install-tabs">
                     <div class="tab active" data-tab="source">Source</div>
                     <div class="tab" data-tab="distribution">Distribution</div>
