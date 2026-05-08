@@ -1,0 +1,153 @@
+{{- $groups := hugo.Data.tools.groups -}}
+{{- $toolCount := 0 -}}
+{{- range $groups -}}
+    {{- $toolCount = add $toolCount (len .tools) -}}
+{{- end -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ site.Params.description }}">
+    <title>{{ site.Title }}</title>
+    <link rel="stylesheet" href="{{ "styles.css" | relURL }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="Midtown tools catalog">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" role="img">
+                    <path d="M5 8.5 16 3l11 5.5v15L16 29 5 23.5v-15Z"></path>
+                    <path d="M10 11h12M10 16h12M10 21h7"></path>
+                </svg>
+            </span>
+            <span>
+                <strong>Midtown Tools</strong>
+                <small>Internal catalog</small>
+            </span>
+        </a>
+        <nav aria-label="Primary navigation">
+            <a href="#catalog">Catalog</a>
+            <a href="#graph">Graph</a>
+            <a href="#install">Install</a>
+            <a href="https://github.com/Midtown-Technology-Group">GitHub</a>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow">Midtown Technology Group</p>
+                <h1 id="hero-title">Small tools for real operator work.</h1>
+                <p class="lede">{{ site.Params.description }}</p>
+                <div class="hero-actions" aria-label="Catalog shortcuts">
+                    <a class="button primary" href="#catalog">Browse catalog</a>
+                    <a class="button secondary" href="#install">Install notes</a>
+                </div>
+            </div>
+            <aside class="snapshot" aria-label="Catalog snapshot">
+                <div class="snapshot-header">
+                    <span>Catalog snapshot</span>
+                    <a href="{{ site.Params.repo }}">site repo</a>
+                </div>
+                <dl>
+                    <div><dt>Listed tools</dt><dd>{{ $toolCount }}</dd></div>
+                    <div><dt>Graph helpers</dt><dd>8</dd></div>
+                    <div><dt>Auth model</dt><dd>WAM-first</dd></div>
+                    <div><dt>Distribution</dt><dd>Private WinGet pilot</dd></div>
+                </dl>
+            </aside>
+        </section>
+
+        <section class="catalog-shell" id="catalog" aria-labelledby="catalog-title">
+            <div class="section-heading">
+                <p class="eyebrow">Current repos</p>
+                <h2 id="catalog-title">Tool Catalog</h2>
+                <p>Grouped for scanning: what talks to Microsoft Graph, what supports operator workflow, and what exists as shared plumbing.</p>
+            </div>
+
+            <div class="tool-groups">
+                {{- range $groups }}
+                <section class="tool-group" id="{{ .id }}" aria-labelledby="group-{{ .id }}">
+                    <div class="group-heading">
+                        <h3 id="group-{{ .id }}">{{ .name }}</h3>
+                        <span>{{ .summary }}</span>
+                    </div>
+                    <div class="tool-list">
+                        {{- range .tools }}
+                        <article class="tool-row accent-{{ .accent }}{{ if .featured }} featured{{ end }}">
+                            <div class="tool-icon" aria-hidden="true">{{ .initials }}</div>
+                            <div class="tool-main">
+                                <h4>{{ .name }}</h4>
+                                <p>{{ .description }}</p>
+                            </div>
+                            <div class="tool-meta">
+                                {{- range .tags }}<span>{{ . }}</span>{{ end -}}
+                            </div>
+                            <code>{{ .command }}</code>
+                            <a href="{{ .repo }}">Repo</a>
+                        </article>
+                        {{- end }}
+                    </div>
+                </section>
+                {{- end }}
+            </div>
+        </section>
+
+        <section class="install-band" id="install" aria-labelledby="install-title">
+            <div class="section-heading">
+                <p class="eyebrow">Run paths</p>
+                <h2 id="install-title">Install Notes</h2>
+                <p>Most tools are still source-first. Distribution is tracked here only when the operator path has been proven.</p>
+            </div>
+            <div class="install-grid">
+                <article>
+                    <h3>Source checkout</h3>
+                    <pre><code>git clone https://github.com/Midtown-Technology-Group/todo.git
+cd todo
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e .[dev]</code></pre>
+                </article>
+                <article>
+                    <h3>Private WinGet pilot</h3>
+                    <pre><code>winget source add -n mtg-tools -a https://wonderful-pond-03cdbc40f.7.azurestaticapps.net
+winget source update
+
+# todo is published in the private feed at 0.1.1</code></pre>
+                </article>
+            </div>
+        </section>
+
+        <section class="standards" aria-labelledby="standards-title">
+            <div class="section-heading">
+                <p class="eyebrow">House rules</p>
+                <h2 id="standards-title">What Makes the Catalog</h2>
+            </div>
+            <div class="standard-grid">
+                <article>
+                    <h3>Narrow job</h3>
+                    <p>Each tool does one operational thing cleanly enough to explain in a sentence.</p>
+                </article>
+                <article>
+                    <h3>Consent story</h3>
+                    <p>Graph-connected tools list the delegated surface and avoid pretending admin consent is invisible.</p>
+                </article>
+                <article>
+                    <h3>Windows path</h3>
+                    <p>The first supported path matches how Midtown operators actually run these tools.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>{{ site.Params.company }}</span>
+        <nav aria-label="Footer navigation">
+            <a href="https://midtowntg.com">Company</a>
+            <a href="https://github.com/Midtown-Technology-Group">GitHub org</a>
+            <a href="{{ site.Params.repo }}">Site repo</a>
+        </nav>
+    </footer>
+</body>
+</html>

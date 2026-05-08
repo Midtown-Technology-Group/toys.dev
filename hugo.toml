@@ -1,0 +1,9 @@
+baseURL = 'https://toys.dev.midtowntg.com/'
+locale = 'en-us'
+title = 'Midtown Tools Catalog'
+disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap']
+
+[params]
+  description = 'A practical index of Windows-first CLIs, Microsoft 365 helpers, reporting utilities, and shared plumbing maintained in Midtown repos.'
+  repo = 'https://github.com/Midtown-Technology-Group/toys.dev'
+  company = 'Midtown Technology Group LLC'

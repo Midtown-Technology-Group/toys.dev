@@ -1,6 +1,6 @@
-# Midtown Toys
+# Midtown Tools Catalog
 
-Small, focused utilities and supporting plumbing for Midtown's internal toy chest.
+Small, focused utilities and supporting plumbing for Midtown's internal tools catalog.
 
 ## Live Site
 
@@ -35,12 +35,13 @@ https://toys.dev.midtowntg.com
 - `file-finder` is listed, but its consent story is heavier than the read-only mail/calendar/task toys.
 - `todo` now publishes a real MSI release into the private WinGet feed.
 - Final `winget source add` / `winget install` proof still needs an elevated client-side pass.
-- The site itself is a lightweight GitHub Pages landing page.
+- The site is built with Hugo and deployed to GitHub Pages from Actions.
+- Catalog entries live in `data/tools.yaml`.
 
 ## Local Preview
 
 ```bash
-python -m http.server 8000
+hugo server
 ```
 
 ## License
