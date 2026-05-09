@@ -1,0 +1,24 @@
+{{- $toolCount := .toolCount -}}
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+        <p class="eyebrow">Midtown Technology Group</p>
+        <h1 id="hero-title">Small tools for real operator work.</h1>
+        <p class="lede">{{ site.Params.description }}</p>
+        <div class="hero-actions" aria-label="Catalog shortcuts">
+            <a class="button primary" href="#catalog">Browse catalog</a>
+            <a class="button secondary" href="#install">Install notes</a>
+        </div>
+    </div>
+    <aside class="snapshot" aria-label="Catalog snapshot">
+        <div class="snapshot-header">
+            <span>Catalog snapshot</span>
+            <a href="{{ site.Params.repo }}">site repo</a>
+        </div>
+        <dl>
+            <div><dt>Listed tools</dt><dd>{{ $toolCount }}</dd></div>
+            <div><dt>Graph helpers</dt><dd>8</dd></div>
+            <div><dt>Auth model</dt><dd>WAM-first</dd></div>
+            <div><dt>Distribution</dt><dd>Private WinGet pilot</dd></div>
+        </dl>
+    </aside>
+</section>

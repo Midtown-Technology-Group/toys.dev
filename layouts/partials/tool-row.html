@@ -1,0 +1,13 @@
+{{- $slug := .repo | urls.Parse | path.Base | anchorize -}}
+<article class="tool-row accent-{{ .accent }}{{ if .featured }} featured{{ end }}" id="toy-{{ $slug }}">
+    <div class="tool-icon" aria-hidden="true">{{ .initials }}</div>
+    <div class="tool-main">
+        <h4>{{ .name }}</h4>
+        <p>{{ .description }}</p>
+    </div>
+    <div class="tool-meta">
+        {{- range .tags }}<span>{{ . }}</span>{{ end -}}
+    </div>
+    <code>{{ .command }}</code>
+    <a href="{{ .repo }}">Repo</a>
+</article>

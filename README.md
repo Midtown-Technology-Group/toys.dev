@@ -37,6 +37,8 @@ https://toys.dev.midtowntg.com
 - Final `winget source add` / `winget install` proof still needs an elevated client-side pass.
 - The site is built with Hugo and deployed to GitHub Pages from Actions.
 - Catalog entries live in `data/tools.yaml`.
+- The local theme is intentionally tiny: page chrome and repeated catalog pieces live in `layouts/partials/`.
+- Each listed repo has its GitHub homepage URL pointed at its matching `toys.dev` catalog anchor.
 
 ## Local Preview
 

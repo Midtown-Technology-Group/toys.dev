@@ -1,0 +1,24 @@
+<section class="install-band" id="install" aria-labelledby="install-title">
+    <div class="section-heading">
+        <p class="eyebrow">Run paths</p>
+        <h2 id="install-title">Install Notes</h2>
+        <p>Most tools are still source-first. Distribution is tracked here only when the operator path has been proven.</p>
+    </div>
+    <div class="install-grid">
+        <article>
+            <h3>Source checkout</h3>
+            <pre><code>git clone https://github.com/Midtown-Technology-Group/todo.git
+cd todo
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e .[dev]</code></pre>
+        </article>
+        <article>
+            <h3>Private WinGet pilot</h3>
+            <pre><code>winget source add -n mtg-tools -a https://wonderful-pond-03cdbc40f.7.azurestaticapps.net
+winget source update
+
+# todo is published in the private feed at 0.1.1</code></pre>
+        </article>
+    </div>
+</section>

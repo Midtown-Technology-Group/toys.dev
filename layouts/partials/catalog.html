@@ -1,0 +1,14 @@
+{{- $groups := .groups -}}
+<section class="catalog-shell" id="catalog" aria-labelledby="catalog-title">
+    <div class="section-heading">
+        <p class="eyebrow">Current repos</p>
+        <h2 id="catalog-title">Tool Catalog</h2>
+        <p>Grouped for scanning: what talks to Microsoft Graph, what supports operator workflow, and what exists as shared plumbing.</p>
+    </div>
+
+    <div class="tool-groups">
+        {{- range $groups }}
+            {{ partial "tool-group.html" . }}
+        {{- end }}
+    </div>
+</section>

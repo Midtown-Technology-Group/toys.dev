@@ -1,0 +1,11 @@
+<section class="tool-group" id="{{ .id }}" aria-labelledby="group-{{ .id }}">
+    <div class="group-heading">
+        <h3 id="group-{{ .id }}">{{ .name }}</h3>
+        <span>{{ .summary }}</span>
+    </div>
+    <div class="tool-list">
+        {{- range .tools }}
+            {{ partial "tool-row.html" . }}
+        {{- end }}
+    </div>
+</section>
