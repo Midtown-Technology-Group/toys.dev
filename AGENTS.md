@@ -8,7 +8,7 @@ From root, `hugo server` provides the local preview and `hugo --minify` builds t
 
 Additional checks (Python 3 plus `pip install -r scripts/requirements.txt`):
 
-- `python scripts/catalog.py validate` — structure, unique group/tool ids, allowed accents, and required fields.
+- `python scripts/catalog.py validate` — structure, unique group/tool ids, and required fields.
 - `python scripts/catalog.py readme --write` (or `--check`) — regenerate or verify the README catalog table.
 - `python scripts/check_links.py public --external` — in-page anchors and external links after `hugo --minify`.
 

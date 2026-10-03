@@ -1,13 +1,10 @@
-{{- $slug := .id -}}
-<article class="tool-row accent-{{ .accent }}{{ if .featured }} featured{{ end }}" id="toy-{{ $slug }}">
-    <div class="tool-icon" aria-hidden="true">{{ .initials }}</div>
-    <div class="tool-main">
-        <h4>{{ .name }}</h4>
-        <p>{{ .description }}</p>
-    </div>
-    <div class="tool-meta">
-        {{- range .tags }}<span>{{ . }}</span>{{ end -}}
-    </div>
-    <code>{{ .command }}</code>
-    <a href="{{ .repo }}">Repo</a>
-</article>
+{{- $tool := .tool -}}
+{{- $index := .index -}}
+<li class="tool-row" id="toy-{{ $tool.id }}">
+    <span class="tool-index">{{ printf "%02d" $index }}</span>
+    <span class="tool-name">{{ $tool.name }}</span>
+    <span class="tool-desc">{{ $tool.description }}</span>
+    <span class="tool-tags">{{ delimit $tool.tags " · " }}</span>
+    <span class="tool-command"><span class="prompt">$</span> {{ $tool.command }}</span>
+    <a class="tool-repo" href="{{ $tool.repo }}">Repo <span aria-hidden="true">&#8599;</span></a>
+</li>

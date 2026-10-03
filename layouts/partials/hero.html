@@ -1,8 +1,8 @@
 {{- $toolCount := .toolCount -}}
-{{- $graphCount := .graphCount -}}
+{{- $groupCount := .groupCount -}}
 <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
-        <p class="eyebrow">Midtown Technology Group</p>
+        <p class="kicker">{{ site.Params.kicker }}</p>
         <h1 id="hero-title">Small tools for real operator work.</h1>
         <p class="lede">{{ site.Params.description }}</p>
         <div class="hero-actions" aria-label="Catalog shortcuts">
@@ -10,16 +10,35 @@
             <a class="button secondary" href="#install">Install notes</a>
         </div>
     </div>
-    <aside class="snapshot" aria-label="Catalog snapshot">
-        <div class="snapshot-header">
-            <span>Catalog snapshot</span>
-            <a href="{{ site.Params.repo }}">site repo</a>
+    <aside class="title-block" aria-label="Catalog title block">
+        <div class="tb-cell wide">
+            <span class="tb-label">Project</span>
+            <span class="tb-value">{{ site.Params.project }}</span>
         </div>
-        <dl>
-            <div><dt>Listed tools</dt><dd>{{ $toolCount }}</dd></div>
-            <div><dt>M365 &amp; PSA</dt><dd>{{ $graphCount }}</dd></div>
-            <div><dt>Auth model</dt><dd>{{ site.Params.authModel }}</dd></div>
-            <div><dt>Distribution</dt><dd>{{ site.Params.distribution }}</dd></div>
-        </dl>
+        <div class="tb-cell">
+            <span class="tb-label">Sheet</span>
+            <span class="tb-value">{{ site.Params.sheet }}</span>
+        </div>
+        <div class="tb-cell end">
+            <span class="tb-label">Revision</span>
+            <span class="tb-value">{{ now | time.Format "2006-01-02" }}</span>
+        </div>
+        <div class="tb-cell">
+            <span class="tb-label">Listed tools</span>
+            <span class="tb-value">{{ $toolCount }}</span>
+        </div>
+        <div class="tb-cell end">
+            <span class="tb-label">Groups</span>
+            <span class="tb-value">{{ $groupCount }}</span>
+        </div>
+        <div class="tb-cell">
+            <span class="tb-label">Auth model</span>
+            <span class="tb-value">{{ site.Params.authModel }}</span>
+        </div>
+        <div class="tb-cell end">
+            <span class="tb-label">Distribution</span>
+            <span class="tb-value">{{ site.Params.distribution }}</span>
+        </div>
+        <div class="tb-caption">Scale 1:1 &middot; Units: Windows / Microsoft 365 &middot; Drawn by {{ site.Params.drawnBy }}</div>
     </aside>
 </section>
