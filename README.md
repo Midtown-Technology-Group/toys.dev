@@ -11,25 +11,25 @@ https://toys.dev.midtowntg.com
 <!-- catalog:start -->
 | Tool | Group | Description |
 | --- | --- | --- |
-| Todo | Microsoft 365 and PSA | Microsoft To Do companion built on shared auth, live-verified with WAM and delegated task scopes. |
-| Mail Triage | Microsoft 365 and PSA | Inbox triage with compact JSON output for notification and follow-up workflows. |
-| Calendar Glance | Microsoft 365 and PSA | Read-only agenda snapshots for short-range planning and meeting context. |
-| Communication Style | Microsoft 365 and PSA | Build local style guides from Teams and Sent Items, including era and participant-focused cuts. |
-| File Finder | Microsoft 365 and PSA | Microsoft 365 file discovery and focused OneDrive actions through delegated Graph. |
-| Halo CLI | Microsoft 365 and PSA | Standalone HaloPSA command line workflows for safe operator and automation use. |
-| Meeting Cost Tracker | Microsoft 365 and PSA | Calculate the real cost of Teams meetings from participant time and hourly rates. |
-| Meeting Extractor | Microsoft 365 and PSA | Extract decisions and action items from Microsoft Teams transcripts. |
-| Quick Capture | Workflow, Notes, and Reporting | Fast capture into notes and workflows with short command aliases intact. |
-| Detour | Workflow, Notes, and Reporting | Track work detours in daily Markdown notes so side work stays visible. |
-| SOP Generator | Workflow, Notes, and Reporting | Turn Greenshot screenshot runs into step-by-step IT documentation. |
-| Time Tracker | Workflow, Notes, and Reporting | Track task time with low friction for MSP work logs and daily-note evidence. |
-| GTD Dashboard | Workflow, Notes, and Reporting | Unified task view across Logseq notes, including waiting-for aging analysis. |
-| Link Validator | Workflow, Notes, and Reporting | Validate knowledge graph links and catch broken wiki-link references. |
-| Topic Trends | Workflow, Notes, and Reporting | Analyze knowledge notes for topics that are heating up, cooling down, or expanding. |
-| Weekly Review | Workflow, Notes, and Reporting | Generate GTD weekly reviews from daily notes and work context. |
-| Shared Microsoft Auth | Shared Plumbing | Reusable WAM-first auth package for Graph tools with common cache behavior. |
-| Context Sync | Shared Plumbing | Mature graph-connected reference implementation for shared Microsoft 365 auth. |
-| Keeper PowerCommander Vault | Shared Plumbing | PowerShell SecretManagement vault backed by Keeper PowerCommander. |
+| Todo | Microsoft 365 and PSA | A Microsoft To Do companion built on our shared auth, using WAM sign-in and delegated task scopes. |
+| Mail Triage | Microsoft 365 and PSA | Scans the inbox and prints compact JSON you can route into notifications and follow-ups. |
+| Calendar Glance | Microsoft 365 and PSA | Read-only snapshots of your agenda for short-range planning and meeting context. |
+| Communication Style | Microsoft 365 and PSA | Build a local style guide from your Teams messages and Sent Items, sliced by time period or participant. |
+| File Finder | Microsoft 365 and PSA | Find files across Microsoft 365 and run focused OneDrive actions through delegated Graph. |
+| Halo CLI | Microsoft 365 and PSA | A standalone command line for HaloPSA, built for safe daily use and automation. |
+| Meeting Cost Tracker | Microsoft 365 and PSA | Work out what a Teams meeting really costs, from participant time and hourly rates. |
+| Meeting Extractor | Microsoft 365 and PSA | Pull decisions and action items out of Microsoft Teams transcripts. |
+| Quick Capture | Workflow, Notes, and Reporting | Get a thought into your notes fast, with short aliases for the commands you use most. |
+| Detour | Workflow, Notes, and Reporting | Log unplanned detours in your daily Markdown notes so side work stays visible. |
+| SOP Generator | Workflow, Notes, and Reporting | Turn a run of Greenshot screenshots into step-by-step IT documentation. |
+| Time Tracker | Workflow, Notes, and Reporting | Track time on tasks with almost no friction, for MSP work logs and daily-note evidence. |
+| GTD Dashboard | Workflow, Notes, and Reporting | One task view across your Logseq notes, including how long items have been waiting. |
+| Link Validator | Workflow, Notes, and Reporting | Check the knowledge graph for broken wiki-links before they pile up. |
+| Topic Trends | Workflow, Notes, and Reporting | See which topics in your notes are heating up, cooling down, or expanding. |
+| Weekly Review | Workflow, Notes, and Reporting | Build your GTD weekly review from daily notes and work context. |
+| Shared Microsoft Auth | Shared Plumbing | A reusable, WAM-first auth package for Graph tools, with shared token caching. |
+| Context Sync | Shared Plumbing | A mature, graph-connected reference implementation of shared Microsoft 365 auth. |
+| Keeper PowerCommander Vault | Shared Plumbing | A PowerShell SecretManagement vault backed by Keeper PowerCommander. |
 <!-- catalog:end -->
 
 This table is generated from `data/tools.yaml` by `scripts/catalog.py readme --write`. Do not edit it by hand; CI fails when it is stale.

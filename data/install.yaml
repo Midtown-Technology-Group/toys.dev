@@ -1,8 +1,8 @@
 eyebrow: Run paths
 heading: Install Notes
-intro: Most tools are still source-first. Distribution is tracked here only when the operator path has been proven.
+intro: Most tools are source-first for now. We only list a package here once we've proven the install path.
 examples:
-  - title: Source checkout
+  - title: From source
     code: |-
       git clone https://github.com/Midtown-Technology-Group/todo.git
       cd todo
