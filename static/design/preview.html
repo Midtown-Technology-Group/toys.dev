@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>toys.dev design variants &mdash; blueprint</title>
+<style>
+:root{
+  --rubric:"Bahnschrift","DIN Alternate","Segoe UI",system-ui,sans-serif;
+  --mono:"Cascadia Mono",Consolas,"SFMono-Regular",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+a{color:inherit}
+h1,h2,h3,p,ol{margin:0}
+ol{list-style:none;padding:0}
+.wrap{max-width:1220px;margin:0 auto;padding:0 28px}
+.kicker{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.variant{position:relative;color:var(--ink);background-color:var(--paper);border-bottom:1px solid var(--line)}
+.vlabel{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:22px 0 0}
+
+/* switcher */
+.switcher{position:sticky;top:0;z-index:50;display:flex;gap:18px;flex-wrap:wrap;align-items:center;
+  padding:12px 28px;background:#0e0e0e;color:#f2efe6;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.switcher b{color:#8fb7ff}
+.switcher a{color:#f2efe6;text-decoration:none;border-bottom:1px solid #555;padding-bottom:1px}
+
+/* header */
+.site-head{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid var(--line2)}
+.mark{display:flex;align-items:center;gap:12px;font-family:var(--rubric);font-weight:700;font-size:1.05rem;letter-spacing:.02em;text-decoration:none}
+.mark .box{width:34px;height:34px;display:grid;place-items:center;border:1.5px solid var(--ink);font-family:var(--mono);font-size:.8rem}
+.site-head nav{display:flex;gap:22px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.site-head nav a{text-decoration:none;color:var(--muted)}
+.site-head nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,430px);gap:56px;padding:64px 0 72px;align-items:end}
+.hero h1{font-family:var(--rubric);font-weight:600;font-size:clamp(2.7rem,5.2vw,4.7rem);line-height:1.02;letter-spacing:-.01em;max-width:15ch}
+.lede{margin-top:22px;font-size:1.06rem;line-height:1.6;color:var(--muted);max-width:52ch}
+.actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{transform:translate(-1px,-1px)}
+
+/* title block */
+.titleblock{border:1.5px solid var(--line2);background:var(--surface);display:grid;grid-template-columns:1fr 1fr}
+.titleblock .cell{padding:14px 16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.titleblock .cell:nth-child(2n){border-right:0}
+.titleblock .cell.wide{grid-column:1/-1}
+.titleblock .lab{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.titleblock .val{font-family:var(--mono);font-size:.82rem;font-weight:700;letter-spacing:.02em}
+.titleblock .cap{grid-column:1/-1;padding:12px 16px;font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+
+/* catalog */
+.catalog{padding:66px 0 40px}
+.sec-head{max-width:720px;margin-bottom:34px}
+.sec-head h2{font-family:var(--rubric);font-weight:600;font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.04}
+.sec-head p{color:var(--muted);margin-top:12px;max-width:60ch}
+.groups{display:grid;gap:44px}
+.group-head{display:grid;grid-template-columns:3rem auto 1fr;align-items:baseline;gap:16px;border-top:2px solid var(--line2);padding:14px 0 10px}
+.gid{font-family:var(--mono);font-size:.78rem;color:var(--accent);font-weight:700}
+.group-head h3{font-family:var(--rubric);font-weight:600;font-size:1.32rem;letter-spacing:.01em}
+.group-head p{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em;text-align:right}
+.tools{display:grid}
+.tool{display:grid;grid-template-columns:2.2rem minmax(9rem,13rem) minmax(0,1fr) max-content max-content max-content;gap:18px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line)}
+.tool .idx{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.tool .name{font-family:var(--rubric);font-weight:600;font-size:1.04rem}
+.tool .desc{color:var(--muted);font-size:.92rem;line-height:1.45}
+.tool .tags{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.02em;white-space:nowrap}
+.tool .cmd{font-family:var(--mono);font-size:.76rem;color:var(--ink);white-space:nowrap}
+.tool .cmd .prompt{color:var(--accent)}
+.tool .repo{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;white-space:nowrap}
+.tool .arw{font-size:.8em}
+.tool.more{opacity:.55}
+footer{padding:34px 0 46px;display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--muted);flex-wrap:wrap}
+
+/* v1 drafting paper */
+.v1{--paper:#f1ede1;--surface:#faf8f1;--surface-2:#ece7d9;--ink:#161e28;--muted:#5b6470;--line:#d5cdba;--line2:#1b2a3a;--accent:#1e4e8c;--accent-ink:#f4f7fb;--grid:rgba(30,70,130,.075);--dot:rgba(30,70,130,.12)}
+.v1{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.v1 .sec-head h2,.v1 .hero h1{text-transform:none}
+
+/* v2 cyanotype */
+.v2{--paper:#0a2233;--surface:#0e2a3d;--surface-2:#0b2436;--ink:#e6f2fa;--muted:#8fb3c9;--line:#1e4763;--line2:#3e7a9e;--accent:#6fc8ff;--accent-ink:#08202f;--grid:rgba(120,200,255,.09);--dot:rgba(120,200,255,.16)}
+.v2{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.v2 .titleblock .val{color:var(--ink)}
+
+/* v3 spec sheet */
+.v3{--paper:#f7f4ec;--surface:#ffffff;--surface-2:#f1ede3;--ink:#11100e;--muted:#6a655c;--line:#ddd7c9;--line2:#11100e;--accent:#11100e;--accent-ink:#ffffff;--grid:transparent;--dot:transparent}
+.v3 .kicker{color:#b3261e}
+.v3 .hero h1{text-transform:uppercase;font-size:clamp(2.8rem,6vw,5.2rem);letter-spacing:-.015em;max-width:13ch}
+.v3 .titleblock{border-color:var(--ink)}
+.v3 .group-head{border-top-width:3px}
+.v3 .tool{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:"name repo" "desc desc" "meta meta";gap:6px 18px;padding:20px 0}
+.v3 .tool .idx{display:none}
+.v3 .tool .name{grid-area:name;font-size:1.5rem}
+.v3 .tool .repo{grid-area:repo;align-self:start}
+.v3 .tool .desc{grid-area:desc;font-size:.95rem}
+.v3 .tool .tags,.v3 .tool .cmd{grid-area:meta;display:inline;font-size:.72rem}
+.v3 .tool .cmd{justify-self:end}
+.v3 .tool::after{content:""}
+
+/* responsive */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:34px;align-items:start}
+  .tool{grid-template-columns:2.2rem minmax(0,1fr) max-content;grid-template-areas:"idx name repo" ". desc desc" ". tags cmd";gap:8px 16px;align-items:start}
+  .tool .idx{grid-area:idx}
+  .tool .name{grid-area:name}
+  .tool .desc{grid-area:desc}
+  .tool .tags{grid-area:tags;padding-top:6px}
+  .tool .cmd{grid-area:cmd;justify-self:end;padding-top:6px}
+  .tool .repo{grid-area:repo}
+  .v3 .tool{grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:"name repo" "desc desc" "tags cmd"}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px}
+  .site-head{flex-direction:column;align-items:flex-start;gap:14px}
+  .group-head{grid-template-columns:2.4rem 1fr;row-gap:4px}
+  .group-head p{grid-column:1/-1;text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="switcher">
+  <span><b>Blueprint variants</b></span>
+  <a href="#v1">01 Drafting Paper</a>
+  <a href="#v2">02 Cyanotype</a>
+  <a href="#v3">03 Spec Sheet</a>
+</div>
+
+<article class="variant v1" id="v1">
+  <div class="wrap">
+    <p class="vlabel">Variant 01 &mdash; Drafting Paper</p>
+    <header class="site-head">
+      <a class="mark" href="#v1"><span class="box">MT</span> Midtown Tools</a>
+      <nav><a href="#v1">Catalog</a><a href="https://github.com/Midtown-Technology-Group">GitHub</a></nav>
+    </header>
+    <section class="hero">
+      <div>
+        <p class="kicker">Midtown Technology Group / Instrument Catalog</p>
+        <h1>Small tools for real operator work.</h1>
+        <p class="lede">A practical index of Windows-first CLIs, Microsoft 365 helpers, reporting utilities, and shared plumbing maintained in Midtown repos.</p>
+        <div class="actions"><a class="btn primary" href="#v1">Browse catalog</a><a class="btn" href="#v1">Install notes</a></div>
+      </div>
+      <aside class="titleblock" aria-label="Catalog title block">
+        <div class="cell wide"><span class="lab">Project</span><span class="val">MTG / Instrument Catalog</span></div>
+        <div class="cell"><span class="lab">Sheet</span><span class="val">01 of 01</span></div>
+        <div class="cell"><span class="lab">Revision</span><span class="val">2026-10-03</span></div>
+        <div class="cell"><span class="lab">Listed tools</span><span class="val">19</span></div>
+        <div class="cell"><span class="lab">Groups</span><span class="val">3</span></div>
+        <div class="cell"><span class="lab">Auth model</span><span class="val">WAM-first</span></div>
+        <div class="cell"><span class="lab">Distribution</span><span class="val">Private WinGet</span></div>
+        <div class="cap">Scale 1:1 &nbsp;&middot;&nbsp; Units: Windows / Microsoft 365 &nbsp;&middot;&nbsp; Drawn by MTG</div>
+      </aside>
+    </section>
+    <section class="catalog">
+      <div class="sec-head"><p class="kicker">Current repos</p><h2>Tool Catalog</h2><p>Grouped for scanning: what talks to Microsoft Graph, what supports operator workflow, and what exists as shared plumbing.</p></div>
+      <div class="groups">
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">01</span>
+          <h3>Microsoft 365 and PSA</h3>
+          <p>Graph, Halo, inbox, calendar, files</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Todo</span>
+          <span class="desc">Microsoft To Do companion built on shared auth, live-verified with WAM and delegated task scopes.</span>
+          <span class="tags">Python · Tasks.Read</span>
+          <span class="cmd"><span class="prompt">$</span> todo --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/todo">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Mail Triage</span>
+          <span class="desc">Inbox triage with compact JSON output for notification and follow-up workflows.</span>
+          <span class="tags">Python · Mail.ReadBasic</span>
+          <span class="cmd"><span class="prompt">$</span> .\invoke.ps1 inbox</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/mail-triage">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">03</span>
+          <span class="name">Calendar Glance</span>
+          <span class="desc">Read-only agenda snapshots for short-range planning and meeting context.</span>
+          <span class="tags">Python · Calendars.Read</span>
+          <span class="cmd"><span class="prompt">$</span> .\invoke.ps1 agenda</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/calendar-glance">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">04</span>
+          <span class="name">Communication Style</span>
+          <span class="desc">Build local style guides from Teams and Sent Items, including era and participant-focused cuts.</span>
+          <span class="tags">Python · Teams · Mail</span>
+          <span class="cmd"><span class="prompt">$</span> communication-style --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/communication-style">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">05</span>
+          <span class="name">File Finder</span>
+          <span class="desc">Microsoft 365 file discovery and focused OneDrive actions through delegated Graph.</span>
+          <span class="tags">Python · OneDrive</span>
+          <span class="cmd"><span class="prompt">$</span> file-finder --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/file-finder">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">06</span>
+          <span class="name">Halo CLI</span>
+          <span class="desc">Standalone HaloPSA command line workflows for safe operator and automation use.</span>
+          <span class="tags">Python · HaloPSA</span>
+          <span class="cmd"><span class="prompt">$</span> halocli --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/halocli">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">07</span>
+          <span class="name">Meeting Cost Tracker</span>
+          <span class="desc">Calculate the real cost of Teams meetings from participant time and hourly rates.</span>
+          <span class="tags">Python · Analytics</span>
+          <span class="cmd"><span class="prompt">$</span> meeting-cost-tracker --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/meeting-cost-tracker">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">08</span>
+          <span class="name">Meeting Extractor</span>
+          <span class="desc">Extract decisions and action items from Microsoft Teams transcripts.</span>
+          <span class="tags">Python · Teams</span>
+          <span class="cmd"><span class="prompt">$</span> meeting-extractor --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/meeting-extractor">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        </ol>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">02</span>
+          <h3>Workflow, Notes, and Reporting</h3>
+          <p>Capture, review, analysis, documentation</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Quick Capture</span>
+          <span class="desc">Fast capture into notes and workflows with short command aliases intact.</span>
+          <span class="tags">Python · Notes</span>
+          <span class="cmd"><span class="prompt">$</span> quick-capture --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/quick-capture">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Detour</span>
+          <span class="desc">Track work detours in daily Markdown notes so side work stays visible.</span>
+          <span class="tags">CLI · Markdown</span>
+          <span class="cmd"><span class="prompt">$</span> detour --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/detour">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">03</span>
+          <span class="name">SOP Generator</span>
+          <span class="desc">Turn Greenshot screenshot runs into step-by-step IT documentation.</span>
+          <span class="tags">Python · Docs</span>
+          <span class="cmd"><span class="prompt">$</span> sop-generator --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/sop-generator">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool more"><span class="idx">&#8230;</span><span class="name">+5 more</span></li>
+        </ol>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">03</span>
+          <h3>Shared Plumbing</h3>
+          <p>Auth, sync, packaging, secure local support</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Shared Microsoft Auth</span>
+          <span class="desc">Reusable WAM-first auth package for Graph tools with common cache behavior.</span>
+          <span class="tags">MSAL · WAM</span>
+          <span class="cmd"><span class="prompt">$</span> mtg-microsoft-auth</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/mtg-microsoft-auth">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Context Sync</span>
+          <span class="desc">Mature graph-connected reference implementation for shared Microsoft 365 auth.</span>
+          <span class="tags">Python · Graph</span>
+          <span class="cmd"><span class="prompt">$</span> work-context-sync --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/context-sync">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool more"><span class="idx">&#8230;</span><span class="name">+1 more</span></li>
+        </ol>
+      </section>
+      </div>
+    </section>
+    <footer><span>Midtown Technology Group LLC</span><span>Site content MIT &middot; tools keep their own licenses</span></footer>
+  </div>
+</article>
+
+<article class="variant v2" id="v2">
+  <div class="wrap">
+    <p class="vlabel">Variant 02 &mdash; Cyanotype</p>
+    <header class="site-head">
+      <a class="mark" href="#v2"><span class="box">MT</span> Midtown Tools</a>
+      <nav><a href="#v2">Catalog</a><a href="https://github.com/Midtown-Technology-Group">GitHub</a></nav>
+    </header>
+    <section class="hero">
+      <div>
+        <p class="kicker">Midtown Technology Group / Instrument Catalog</p>
+        <h1>Small tools for real operator work.</h1>
+        <p class="lede">A practical index of Windows-first CLIs, Microsoft 365 helpers, reporting utilities, and shared plumbing maintained in Midtown repos.</p>
+        <div class="actions"><a class="btn primary" href="#v2">Browse catalog</a><a class="btn" href="#v2">Install notes</a></div>
+      </div>
+      <aside class="titleblock" aria-label="Catalog title block">
+        <div class="cell wide"><span class="lab">Project</span><span class="val">MTG / Instrument Catalog</span></div>
+        <div class="cell"><span class="lab">Sheet</span><span class="val">01 of 01</span></div>
+        <div class="cell"><span class="lab">Revision</span><span class="val">2026-10-03</span></div>
+        <div class="cell"><span class="lab">Listed tools</span><span class="val">19</span></div>
+        <div class="cell"><span class="lab">Groups</span><span class="val">3</span></div>
+        <div class="cell"><span class="lab">Auth model</span><span class="val">WAM-first</span></div>
+        <div class="cell"><span class="lab">Distribution</span><span class="val">Private WinGet</span></div>
+        <div class="cap">Scale 1:1 &nbsp;&middot;&nbsp; Units: Windows / Microsoft 365 &nbsp;&middot;&nbsp; Drawn by MTG</div>
+      </aside>
+    </section>
+    <section class="catalog">
+      <div class="sec-head"><p class="kicker">Current repos</p><h2>Tool Catalog</h2><p>Grouped for scanning: what talks to Microsoft Graph, what supports operator workflow, and what exists as shared plumbing.</p></div>
+      <div class="groups">
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">01</span>
+          <h3>Microsoft 365 and PSA</h3>
+          <p>Graph, Halo, inbox, calendar, files</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Todo</span>
+          <span class="desc">Microsoft To Do companion built on shared auth, live-verified with WAM and delegated task scopes.</span>
+          <span class="tags">Python · Tasks.Read</span>
+          <span class="cmd"><span class="prompt">$</span> todo --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/todo">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Mail Triage</span>
+          <span class="desc">Inbox triage with compact JSON output for notification and follow-up workflows.</span>
+          <span class="tags">Python · Mail.ReadBasic</span>
+          <span class="cmd"><span class="prompt">$</span> .\invoke.ps1 inbox</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/mail-triage">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">03</span>
+          <span class="name">Calendar Glance</span>
+          <span class="desc">Read-only agenda snapshots for short-range planning and meeting context.</span>
+          <span class="tags">Python · Calendars.Read</span>
+          <span class="cmd"><span class="prompt">$</span> .\invoke.ps1 agenda</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/calendar-glance">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">04</span>
+          <span class="name">Communication Style</span>
+          <span class="desc">Build local style guides from Teams and Sent Items, including era and participant-focused cuts.</span>
+          <span class="tags">Python · Teams · Mail</span>
+          <span class="cmd"><span class="prompt">$</span> communication-style --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/communication-style">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">05</span>
+          <span class="name">File Finder</span>
+          <span class="desc">Microsoft 365 file discovery and focused OneDrive actions through delegated Graph.</span>
+          <span class="tags">Python · OneDrive</span>
+          <span class="cmd"><span class="prompt">$</span> file-finder --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/file-finder">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">06</span>
+          <span class="name">Halo CLI</span>
+          <span class="desc">Standalone HaloPSA command line workflows for safe operator and automation use.</span>
+          <span class="tags">Python · HaloPSA</span>
+          <span class="cmd"><span class="prompt">$</span> halocli --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/halocli">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">07</span>
+          <span class="name">Meeting Cost Tracker</span>
+          <span class="desc">Calculate the real cost of Teams meetings from participant time and hourly rates.</span>
+          <span class="tags">Python · Analytics</span>
+          <span class="cmd"><span class="prompt">$</span> meeting-cost-tracker --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/meeting-cost-tracker">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">08</span>
+          <span class="name">Meeting Extractor</span>
+          <span class="desc">Extract decisions and action items from Microsoft Teams transcripts.</span>
+          <span class="tags">Python · Teams</span>
+          <span class="cmd"><span class="prompt">$</span> meeting-extractor --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/meeting-extractor">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        </ol>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">02</span>
+          <h3>Workflow, Notes, and Reporting</h3>
+          <p>Capture, review, analysis, documentation</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Quick Capture</span>
+          <span class="desc">Fast capture into notes and workflows with short command aliases intact.</span>
+          <span class="tags">Python · Notes</span>
+          <span class="cmd"><span class="prompt">$</span> quick-capture --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/quick-capture">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Detour</span>
+          <span class="desc">Track work detours in daily Markdown notes so side work stays visible.</span>
+          <span class="tags">CLI · Markdown</span>
+          <span class="cmd"><span class="prompt">$</span> detour --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/detour">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">03</span>
+          <span class="name">SOP Generator</span>
+          <span class="desc">Turn Greenshot screenshot runs into step-by-step IT documentation.</span>
+          <span class="tags">Python · Docs</span>
+          <span class="cmd"><span class="prompt">$</span> sop-generator --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/sop-generator">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool more"><span class="idx">&#8230;</span><span class="name">+5 more</span></li>
+        </ol>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">03</span>
+          <h3>Shared Plumbing</h3>
+          <p>Auth, sync, packaging, secure local support</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Shared Microsoft Auth</span>
+          <span class="desc">Reusable WAM-first auth package for Graph tools with common cache behavior.</span>
+          <span class="tags">MSAL · WAM</span>
+          <span class="cmd"><span class="prompt">$</span> mtg-microsoft-auth</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/mtg-microsoft-auth">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Context Sync</span>
+          <span class="desc">Mature graph-connected reference implementation for shared Microsoft 365 auth.</span>
+          <span class="tags">Python · Graph</span>
+          <span class="cmd"><span class="prompt">$</span> work-context-sync --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/context-sync">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool more"><span class="idx">&#8230;</span><span class="name">+1 more</span></li>
+        </ol>
+      </section>
+      </div>
+    </section>
+    <footer><span>Midtown Technology Group LLC</span><span>Site content MIT &middot; tools keep their own licenses</span></footer>
+  </div>
+</article>
+
+<article class="variant v3" id="v3">
+  <div class="wrap">
+    <p class="vlabel">Variant 03 &mdash; Spec Sheet</p>
+    <header class="site-head">
+      <a class="mark" href="#v3"><span class="box">MT</span> Midtown Tools</a>
+      <nav><a href="#v3">Catalog</a><a href="https://github.com/Midtown-Technology-Group">GitHub</a></nav>
+    </header>
+    <section class="hero">
+      <div>
+        <p class="kicker">Midtown Technology Group / Instrument Catalog</p>
+        <h1>Small tools for real operator work.</h1>
+        <p class="lede">A practical index of Windows-first CLIs, Microsoft 365 helpers, reporting utilities, and shared plumbing maintained in Midtown repos.</p>
+        <div class="actions"><a class="btn primary" href="#v3">Browse catalog</a><a class="btn" href="#v3">Install notes</a></div>
+      </div>
+      <aside class="titleblock" aria-label="Catalog title block">
+        <div class="cell wide"><span class="lab">Project</span><span class="val">MTG / Instrument Catalog</span></div>
+        <div class="cell"><span class="lab">Sheet</span><span class="val">01 of 01</span></div>
+        <div class="cell"><span class="lab">Revision</span><span class="val">2026-10-03</span></div>
+        <div class="cell"><span class="lab">Listed tools</span><span class="val">19</span></div>
+        <div class="cell"><span class="lab">Groups</span><span class="val">3</span></div>
+        <div class="cell"><span class="lab">Auth model</span><span class="val">WAM-first</span></div>
+        <div class="cell"><span class="lab">Distribution</span><span class="val">Private WinGet</span></div>
+        <div class="cap">Scale 1:1 &nbsp;&middot;&nbsp; Units: Windows / Microsoft 365 &nbsp;&middot;&nbsp; Drawn by MTG</div>
+      </aside>
+    </section>
+    <section class="catalog">
+      <div class="sec-head"><p class="kicker">Current repos</p><h2>Tool Catalog</h2><p>Grouped for scanning: what talks to Microsoft Graph, what supports operator workflow, and what exists as shared plumbing.</p></div>
+      <div class="groups">
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">01</span>
+          <h3>Microsoft 365 and PSA</h3>
+          <p>Graph, Halo, inbox, calendar, files</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Todo</span>
+          <span class="desc">Microsoft To Do companion built on shared auth, live-verified with WAM and delegated task scopes.</span>
+          <span class="tags">Python · Tasks.Read</span>
+          <span class="cmd"><span class="prompt">$</span> todo --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/todo">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Mail Triage</span>
+          <span class="desc">Inbox triage with compact JSON output for notification and follow-up workflows.</span>
+          <span class="tags">Python · Mail.ReadBasic</span>
+          <span class="cmd"><span class="prompt">$</span> .\invoke.ps1 inbox</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/mail-triage">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">03</span>
+          <span class="name">Calendar Glance</span>
+          <span class="desc">Read-only agenda snapshots for short-range planning and meeting context.</span>
+          <span class="tags">Python · Calendars.Read</span>
+          <span class="cmd"><span class="prompt">$</span> .\invoke.ps1 agenda</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/calendar-glance">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">04</span>
+          <span class="name">Communication Style</span>
+          <span class="desc">Build local style guides from Teams and Sent Items, including era and participant-focused cuts.</span>
+          <span class="tags">Python · Teams · Mail</span>
+          <span class="cmd"><span class="prompt">$</span> communication-style --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/communication-style">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">05</span>
+          <span class="name">File Finder</span>
+          <span class="desc">Microsoft 365 file discovery and focused OneDrive actions through delegated Graph.</span>
+          <span class="tags">Python · OneDrive</span>
+          <span class="cmd"><span class="prompt">$</span> file-finder --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/file-finder">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">06</span>
+          <span class="name">Halo CLI</span>
+          <span class="desc">Standalone HaloPSA command line workflows for safe operator and automation use.</span>
+          <span class="tags">Python · HaloPSA</span>
+          <span class="cmd"><span class="prompt">$</span> halocli --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/halocli">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">07</span>
+          <span class="name">Meeting Cost Tracker</span>
+          <span class="desc">Calculate the real cost of Teams meetings from participant time and hourly rates.</span>
+          <span class="tags">Python · Analytics</span>
+          <span class="cmd"><span class="prompt">$</span> meeting-cost-tracker --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/meeting-cost-tracker">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">08</span>
+          <span class="name">Meeting Extractor</span>
+          <span class="desc">Extract decisions and action items from Microsoft Teams transcripts.</span>
+          <span class="tags">Python · Teams</span>
+          <span class="cmd"><span class="prompt">$</span> meeting-extractor --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/meeting-extractor">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        </ol>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">02</span>
+          <h3>Workflow, Notes, and Reporting</h3>
+          <p>Capture, review, analysis, documentation</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Quick Capture</span>
+          <span class="desc">Fast capture into notes and workflows with short command aliases intact.</span>
+          <span class="tags">Python · Notes</span>
+          <span class="cmd"><span class="prompt">$</span> quick-capture --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/quick-capture">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Detour</span>
+          <span class="desc">Track work detours in daily Markdown notes so side work stays visible.</span>
+          <span class="tags">CLI · Markdown</span>
+          <span class="cmd"><span class="prompt">$</span> detour --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/detour">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">03</span>
+          <span class="name">SOP Generator</span>
+          <span class="desc">Turn Greenshot screenshot runs into step-by-step IT documentation.</span>
+          <span class="tags">Python · Docs</span>
+          <span class="cmd"><span class="prompt">$</span> sop-generator --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/sop-generator">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool more"><span class="idx">&#8230;</span><span class="name">+5 more</span></li>
+        </ol>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <span class="gid">03</span>
+          <h3>Shared Plumbing</h3>
+          <p>Auth, sync, packaging, secure local support</p>
+        </div>
+        <ol class="tools">
+        <li class="tool">
+          <span class="idx">01</span>
+          <span class="name">Shared Microsoft Auth</span>
+          <span class="desc">Reusable WAM-first auth package for Graph tools with common cache behavior.</span>
+          <span class="tags">MSAL · WAM</span>
+          <span class="cmd"><span class="prompt">$</span> mtg-microsoft-auth</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/mtg-microsoft-auth">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool">
+          <span class="idx">02</span>
+          <span class="name">Context Sync</span>
+          <span class="desc">Mature graph-connected reference implementation for shared Microsoft 365 auth.</span>
+          <span class="tags">Python · Graph</span>
+          <span class="cmd"><span class="prompt">$</span> work-context-sync --help</span>
+          <a class="repo" href="https://github.com/Midtown-Technology-Group/context-sync">Repo <span class="arw">&#8599;</span></a>
+        </li>
+        <li class="tool more"><span class="idx">&#8230;</span><span class="name">+1 more</span></li>
+        </ol>
+      </section>
+      </div>
+    </section>
+    <footer><span>Midtown Technology Group LLC</span><span>Site content MIT &middot; tools keep their own licenses</span></footer>
+  </div>
+</article>
+
+</body>
+</html>
