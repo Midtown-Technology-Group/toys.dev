@@ -1,9 +1,44 @@
 baseURL = 'https://toys.dev.midtowntg.com/'
 locale = 'en-us'
 title = 'Midtown Tools Catalog'
-disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap']
+disableKinds = ['taxonomy', 'term', 'RSS']
+disableHugoGeneratorInject = true
+enableRobotsTXT = true
 
 [params]
   description = 'A practical index of Windows-first CLIs, Microsoft 365 helpers, reporting utilities, and shared plumbing maintained in Midtown repos.'
   repo = 'https://github.com/Midtown-Technology-Group/toys.dev'
   company = 'Midtown Technology Group LLC'
+  authModel = 'WAM-first'
+  distribution = 'Private WinGet pilot'
+  license = 'MIT'
+
+# Hugo restricts external executables, remote fetches, and environment access
+# through allowlists. This site uses none of them, so deny them explicitly
+# instead of relying on Hugo's broad defaults.
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = []
+    osEnv = []
+  [security.funcs]
+    getenv = ['^HUGO_']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = []
+
+# No embedded third-party templates are used. Keep them disabled so a future
+# shortcode cannot silently call out to an external service.
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.x]
+    disable = true
+  [privacy.youTube]
+    disable = true

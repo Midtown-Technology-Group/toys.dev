@@ -1,4 +1,5 @@
 {{- $toolCount := .toolCount -}}
+{{- $graphCount := .graphCount -}}
 <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
         <p class="eyebrow">Midtown Technology Group</p>
@@ -16,9 +17,9 @@
         </div>
         <dl>
             <div><dt>Listed tools</dt><dd>{{ $toolCount }}</dd></div>
-            <div><dt>Graph helpers</dt><dd>8</dd></div>
-            <div><dt>Auth model</dt><dd>WAM-first</dd></div>
-            <div><dt>Distribution</dt><dd>Private WinGet pilot</dd></div>
+            <div><dt>M365 &amp; PSA</dt><dd>{{ $graphCount }}</dd></div>
+            <div><dt>Auth model</dt><dd>{{ site.Params.authModel }}</dd></div>
+            <div><dt>Distribution</dt><dd>{{ site.Params.distribution }}</dd></div>
         </dl>
     </aside>
 </section>
