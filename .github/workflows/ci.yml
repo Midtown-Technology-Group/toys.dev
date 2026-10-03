@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.161.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install Hugo (checksum verified)
+        run: |
+          set -euo pipefail
+          base="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
+          deb="hugo_${HUGO_VERSION}_linux-amd64.deb"
+          curl -sSL -o "/tmp/${deb}" "${base}/${deb}"
+          curl -sSL -o /tmp/hugo_checksums.txt "${base}/hugo_${HUGO_VERSION}_checksums.txt"
+          (cd /tmp && grep " ${deb}$" hugo_checksums.txt | sha256sum -c -)
+          sudo dpkg -i "/tmp/${deb}"
+          hugo version
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Install script dependencies
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements.txt
+
+      - name: Validate catalog data
+        run: python scripts/catalog.py validate
+
+      - name: Check generated README is current
+        run: python scripts/catalog.py readme --check
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: Check links (anchors and internal targets)
+        run: python scripts/check_links.py public
+
+      # External links are checked after merge, so a new link added in a pull
+      # request is not failed by content that only exists on the base branch.
+      - name: Check external links
+        if: github.event_name == 'push'
+        run: python scripts/check_links.py public --external

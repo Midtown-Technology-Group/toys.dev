@@ -1,0 +1,17 @@
+eyebrow: Run paths
+heading: Install Notes
+intro: Most tools are still source-first. Distribution is tracked here only when the operator path has been proven.
+examples:
+  - title: Source checkout
+    code: |-
+      git clone https://github.com/Midtown-Technology-Group/todo.git
+      cd todo
+      py -3 -m venv .venv
+      .\.venv\Scripts\python.exe -m pip install --upgrade pip
+      .\.venv\Scripts\python.exe -m pip install -e .[dev]
+  - title: Private WinGet pilot
+    code: |-
+      winget source add -n mtg-tools -a https://wonderful-pond-03cdbc40f.7.azurestaticapps.net
+      winget source update
+
+      # todo is published in the private feed at 0.1.1

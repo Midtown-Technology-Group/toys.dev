@@ -1,4 +1,4 @@
-{{- $slug := .repo | urls.Parse | path.Base | anchorize -}}
+{{- $slug := .id -}}
 <article class="tool-row accent-{{ .accent }}{{ if .featured }} featured{{ end }}" id="toy-{{ $slug }}">
     <div class="tool-icon" aria-hidden="true">{{ .initials }}</div>
     <div class="tool-main">
