@@ -11,15 +11,20 @@ from __future__ import annotations
 
 import argparse
 import sys
+import time
 import urllib.error
 import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
 
 USER_AGENT = "mtg-toys-link-check/1.0 (+https://toys.dev.midtowntg.com)"
-# Statuses that are not evidence of a broken link (auth walls, wrong method,
-# rate limits).
-IGNORED_STATUS = {403, 405, 429}
+# Statuses that are not evidence of a broken link (auth walls, wrong method).
+IGNORED_STATUS = {403, 405}
+# Transient statuses worth retrying, and those to downgrade to a warning if
+# they persist (a flaky upstream should not red the gate).
+RETRY_STATUS = {408, 429, 500, 502, 503, 504}
+WARN_STATUS = {429, 500, 502, 503, 504}
+EXTERNAL_ATTEMPTS = 3
 
 
 class LinkParser(HTMLParser):
@@ -58,16 +63,29 @@ def resolve_local(site_root: Path, html_file: Path, href: str) -> Path | None:
     return html_file.parent / target
 
 
-def check_external(url: str) -> str | None:
-    """Return an error string for a broken external URL, else None."""
-    request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
-    try:
-        with urllib.request.urlopen(request, timeout=20) as response:
-            return None if response.status < 400 else f"{url}: HTTP {response.status}"
-    except urllib.error.HTTPError as exc:
-        return None if exc.code in IGNORED_STATUS else f"{url}: HTTP {exc.code}"
-    except Exception as exc:  # noqa: BLE001 - report any transport failure
-        return f"{url}: {exc}"
+def check_external(url: str) -> tuple[str | None, str | None]:
+    """Return (error, warning) for an external URL, retrying transient statuses."""
+    last: object = None
+    for attempt in range(EXTERNAL_ATTEMPTS):
+        try:
+            request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(request, timeout=20) as response:
+                if response.status < 400:
+                    return None, None
+                last = response.status
+        except urllib.error.HTTPError as exc:
+            if exc.code in IGNORED_STATUS:
+                return None, None
+            last = exc.code
+        except Exception as exc:  # noqa: BLE001 - report any transport failure
+            last = str(exc)
+        if not (isinstance(last, int) and last in RETRY_STATUS):
+            break
+        if attempt < EXTERNAL_ATTEMPTS - 1:
+            time.sleep(2 * (attempt + 1))
+    if isinstance(last, int) and last in WARN_STATUS:
+        return None, f"{url}: HTTP {last} (transient, ignored)"
+    return f"{url}: {last}", None
 
 
 def main() -> None:
@@ -84,6 +102,7 @@ def main() -> None:
         sys.exit(1)
 
     errors: list[str] = []
+    warnings: list[str] = []
     externals: set[str] = set()
     for html_file in html_files:
         parsed = parse_html(html_file)
@@ -112,10 +131,14 @@ def main() -> None:
 
     if args.external:
         for url in sorted(externals):
-            problem = check_external(url)
-            if problem:
-                errors.append(problem)
+            error, warning = check_external(url)
+            if error:
+                errors.append(error)
+            elif warning:
+                warnings.append(warning)
 
+    for warning in warnings:
+        print(f"warning: {warning}", file=sys.stderr)
     if errors:
         for error in errors:
             print(f"error: {error}", file=sys.stderr)
