@@ -23,12 +23,15 @@ IGNORED_STATUS = {403, 405, 429}
 
 
 class LinkParser(HTMLParser):
+    """Collect element ids and link targets from one HTML document."""
+
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.ids: set[str] = set()
         self.urls: list[str] = []
 
     def handle_starttag(self, tag, attrs):
+        """Record ids and href/src targets as tags are encountered."""
         attrs = dict(attrs)
         if attrs.get("id"):
             self.ids.add(attrs["id"])
@@ -39,12 +42,14 @@ class LinkParser(HTMLParser):
 
 
 def parse_html(path: Path) -> LinkParser:
+    """Parse one HTML file and return its ids and link targets."""
     parser = LinkParser()
     parser.feed(path.read_text(encoding="utf-8"))
     return parser
 
 
 def resolve_local(site_root: Path, html_file: Path, href: str) -> Path | None:
+    """Resolve an href to a filesystem path under the built site."""
     target = href.split("#", 1)[0].split("?", 1)[0]
     if not target:
         return None
@@ -54,6 +59,7 @@ def resolve_local(site_root: Path, html_file: Path, href: str) -> Path | None:
 
 
 def check_external(url: str) -> str | None:
+    """Return an error string for a broken external URL, else None."""
     request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
     try:
         with urllib.request.urlopen(request, timeout=20) as response:
@@ -65,6 +71,7 @@ def check_external(url: str) -> str | None:
 
 
 def main() -> None:
+    """Check anchors and internal targets in a built site, optionally external links."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("site", type=Path, help="built site directory (e.g. public)")
     parser.add_argument("--external", action="store_true", help="also check external http(s) links")
@@ -93,6 +100,9 @@ def main() -> None:
                 continue
             anchor = url.split("#", 1)[1] if "#" in url else None
             target = resolve_local(site_root, html_file, url)
+            # A directory target serves its index.html, so check the fragment there.
+            if anchor and target is not None and target.is_dir():
+                target = target / "index.html"
             if target is not None and not target.exists():
                 errors.append(f"{html_file}: missing internal target {url}")
             elif anchor and target is not None and target.suffix == ".html":

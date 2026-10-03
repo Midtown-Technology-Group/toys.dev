@@ -29,11 +29,13 @@ ID_PATTERN = re.compile(r"[a-z0-9.-]+")
 
 
 def die(message: str) -> None:
+    """Print an error to stderr and exit non-zero."""
     print(f"error: {message}", file=sys.stderr)
     sys.exit(1)
 
 
 def load_catalog() -> dict:
+    """Load data/tools.yaml and confirm it has a top-level groups list."""
     try:
         data = yaml.safe_load(TOOLS_FILE.read_text(encoding="utf-8"))
     except FileNotFoundError:
@@ -46,6 +48,7 @@ def load_catalog() -> dict:
 
 
 def validate() -> None:
+    """Validate catalog fields and uniqueness, then print a summary."""
     data = load_catalog()
     group_ids: set[str] = set()
     tool_ids: set[str] = set()
@@ -77,17 +80,23 @@ def validate() -> None:
     print(f"catalog ok: {len(tool_ids)} tools in {len(group_ids)} groups")
 
 
+def cell(value: object) -> str:
+    """Collapse whitespace and escape pipes so a value cannot break the table."""
+    return " ".join(str(value).split()).replace("|", "\\|")
+
+
 def render_readme_block() -> str:
+    """Render the catalog table placed between the README markers."""
     data = load_catalog()
     lines = ["| Tool | Group | Description |", "| --- | --- | --- |"]
     for group in data["groups"]:
         for tool in group["tools"]:
-            description = " ".join(str(tool["description"]).split()).replace("|", "\\|")
-            lines.append(f"| {tool['name']} | {group['name']} | {description} |")
+            lines.append(f"| {cell(tool['name'])} | {cell(group['name'])} | {cell(tool['description'])} |")
     return "\n".join(lines)
 
 
 def readme(mode: str) -> None:
+    """Regenerate the README catalog block, or fail when it is stale."""
     raw = README_FILE.read_bytes()
     crlf = b"\r\n" in raw
     text = raw.decode("utf-8").replace("\r\n", "\n")
@@ -107,6 +116,7 @@ def readme(mode: str) -> None:
 
 
 def main() -> None:
+    """Parse arguments and dispatch to a subcommand."""
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate", help="validate data/tools.yaml")
