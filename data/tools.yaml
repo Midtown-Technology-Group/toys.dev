@@ -23,34 +23,28 @@ groups:
         repo: https://github.com/Midtown-Technology-Group/calendar-glance
       - name: Communication Style
         id: communication-style
-        description: Build a local style guide from your Teams messages and Sent Items, sliced by time period or participant.
-        tags: [Python, Teams, Mail]
+        description: Build a local style guide from your sent mail and Teams chats, sliced by time period or participant.
+        tags: [Python, Mail.Read, Chat.Read]
         command: communication-style --help
         repo: https://github.com/Midtown-Technology-Group/communication-style
       - name: File Finder
         id: file-finder
-        description: Find files across Microsoft 365 and run focused OneDrive actions through delegated Graph.
-        tags: [Python, OneDrive]
+        description: Search Microsoft 365 files and run focused folder and file actions through delegated Graph.
+        tags: [Python, Files.Read]
         command: file-finder --help
         repo: https://github.com/Midtown-Technology-Group/file-finder
       - name: Halo CLI
         id: halocli
-        description: A standalone command line for HaloPSA, built for safe daily use and automation.
-        tags: [Python, HaloPSA]
+        description: A standalone HaloPSA CLI and MCP server for safe operator and automation work.
+        tags: [Python, HaloPSA, MCP]
         command: halocli --help
         repo: https://github.com/Midtown-Technology-Group/halocli
       - name: Meeting Cost Tracker
         id: meeting-cost-tracker
         description: Work out what a Teams meeting really costs, from participant time and hourly rates.
         tags: [Python, Analytics]
-        command: meeting-cost-tracker --help
+        command: mct --help
         repo: https://github.com/Midtown-Technology-Group/meeting-cost-tracker
-      - name: Meeting Extractor
-        id: meeting-extractor
-        description: Pull decisions and action items out of Microsoft Teams transcripts.
-        tags: [Python, Teams]
-        command: meeting-extractor --help
-        repo: https://github.com/Midtown-Technology-Group/meeting-extractor
 
   - name: Workflow, Notes, and Reporting
     id: workflow
@@ -58,7 +52,7 @@ groups:
     tools:
       - name: Quick Capture
         id: quick-capture
-        description: Get a thought into your notes fast, with short aliases for the commands you use most.
+        description: Capture tasks, ideas, notes, and logs into your Logseq daily notes.
         tags: [Python, Notes]
         command: quick-capture --help
         repo: https://github.com/Midtown-Technology-Group/quick-capture
@@ -70,34 +64,22 @@ groups:
         repo: https://github.com/Midtown-Technology-Group/detour
       - name: SOP Generator
         id: sop-generator
-        description: Turn a run of Greenshot screenshots into step-by-step IT documentation.
-        tags: [Python, Docs]
+        description: Record a browser workflow, review the draft, and publish a Halo KB article.
+        tags: [Python, Halo]
         command: sop-generator --help
         repo: https://github.com/Midtown-Technology-Group/sop-generator
       - name: Time Tracker
         id: time-tracker
-        description: Track time on tasks with almost no friction, for MSP work logs and daily-note evidence.
+        description: Track billable time on tasks with almost no friction, for MSP work logs and daily-note evidence.
         tags: [Python, CLI]
         command: time-tracker --help
         repo: https://github.com/Midtown-Technology-Group/time-tracker
       - name: GTD Dashboard
         id: gtd-dashboard
-        description: One task view across your Logseq notes, including how long items have been waiting.
+        description: One task view across your Logseq notes and Microsoft 365 work context, including how long items have been waiting.
         tags: [Python, GTD]
         command: gtd-dashboard --help
         repo: https://github.com/Midtown-Technology-Group/gtd-dashboard
-      - name: Link Validator
-        id: link-validator
-        description: Check the knowledge graph for broken wiki-links before they pile up.
-        tags: [Python, Quality]
-        command: link-validator --help
-        repo: https://github.com/Midtown-Technology-Group/link-validator
-      - name: Topic Trends
-        id: topic-trends
-        description: See which topics in your notes are heating up, cooling down, or expanding.
-        tags: [Python, Analytics]
-        command: topic-trends --help
-        repo: https://github.com/Midtown-Technology-Group/topic-trends
       - name: Weekly Review
         id: weekly-review
         description: Build your GTD weekly review from daily notes and work context.
@@ -113,17 +95,17 @@ groups:
         id: mtg-microsoft-auth
         description: A reusable, WAM-first auth package for Graph tools, with shared token caching.
         tags: [MSAL, WAM]
-        command: mtg-microsoft-auth
+        command: mtg-auth
         repo: https://github.com/Midtown-Technology-Group/mtg-microsoft-auth
       - name: Context Sync
         id: context-sync
-        description: A mature, graph-connected reference implementation of shared Microsoft 365 auth.
+        description: Sync Microsoft 365 mail, calendar, and chats into a Logseq graph, with calendar timeblocking.
         tags: [Python, Graph]
         command: work-context-sync --help
         repo: https://github.com/Midtown-Technology-Group/context-sync
       - name: Keeper PowerCommander Vault
         id: secretmanagementkeeperpowercommander
-        description: A PowerShell SecretManagement vault backed by Keeper PowerCommander.
+        description: A PowerShell SecretManagement vault backed by Keeper PowerCommander, with no Secrets Manager required.
         tags: [PowerShell, Keeper]
         command: Install-Module
         repo: https://github.com/Midtown-Technology-Group/SecretManagement.KeeperPowerCommander
