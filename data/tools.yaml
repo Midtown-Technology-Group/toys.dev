@@ -1,130 +1,129 @@
 groups:
   - name: Microsoft 365 and PSA
     id: graph
-    summary: Graph, Halo, inbox, calendar, files
+    summary: Microsoft 365, Halo, inbox, calendar, and files
     tools:
       - name: Todo
         id: todo
-        description: Microsoft To Do companion built on shared auth, live-verified with WAM and delegated task scopes.
+        description: A Microsoft To Do companion built on our shared auth, using WAM sign-in and delegated task scopes.
         tags: [Python, Tasks.Read]
         command: todo --help
         repo: https://github.com/Midtown-Technology-Group/todo
       - name: Mail Triage
         id: mail-triage
-        description: Inbox triage with compact JSON output for notification and follow-up workflows.
+        description: Scans the inbox and prints compact JSON you can route into notifications and follow-ups.
         tags: [Python, Mail.ReadBasic]
         command: .\invoke.ps1 inbox
         repo: https://github.com/Midtown-Technology-Group/mail-triage
       - name: Calendar Glance
         id: calendar-glance
-        description: Read-only agenda snapshots for short-range planning and meeting context.
+        description: Read-only snapshots of your agenda for short-range planning and meeting context.
         tags: [Python, Calendars.Read]
         command: .\invoke.ps1 agenda
         repo: https://github.com/Midtown-Technology-Group/calendar-glance
       - name: Communication Style
         id: communication-style
-        description: Build local style guides from Teams and Sent Items, including era and participant-focused cuts.
+        description: Build a local style guide from your Teams messages and Sent Items, sliced by time period or participant.
         tags: [Python, Teams, Mail]
         command: communication-style --help
         repo: https://github.com/Midtown-Technology-Group/communication-style
       - name: File Finder
         id: file-finder
-        description: Microsoft 365 file discovery and focused OneDrive actions through delegated Graph.
+        description: Find files across Microsoft 365 and run focused OneDrive actions through delegated Graph.
         tags: [Python, OneDrive]
         command: file-finder --help
         repo: https://github.com/Midtown-Technology-Group/file-finder
       - name: Halo CLI
         id: halocli
-        description: Standalone HaloPSA command line workflows for safe operator and automation use.
+        description: A standalone command line for HaloPSA, built for safe daily use and automation.
         tags: [Python, HaloPSA]
         command: halocli --help
         repo: https://github.com/Midtown-Technology-Group/halocli
       - name: Meeting Cost Tracker
         id: meeting-cost-tracker
-        description: Calculate the real cost of Teams meetings from participant time and hourly rates.
+        description: Work out what a Teams meeting really costs, from participant time and hourly rates.
         tags: [Python, Analytics]
         command: meeting-cost-tracker --help
         repo: https://github.com/Midtown-Technology-Group/meeting-cost-tracker
       - name: Meeting Extractor
         id: meeting-extractor
-        description: Extract decisions and action items from Microsoft Teams transcripts.
+        description: Pull decisions and action items out of Microsoft Teams transcripts.
         tags: [Python, Teams]
         command: meeting-extractor --help
         repo: https://github.com/Midtown-Technology-Group/meeting-extractor
 
   - name: Workflow, Notes, and Reporting
     id: workflow
-    summary: Capture, review, analysis, documentation
+    summary: Capture, review, analysis, and documentation
     tools:
       - name: Quick Capture
         id: quick-capture
-        description: Fast capture into notes and workflows with short command aliases intact.
+        description: Get a thought into your notes fast, with short aliases for the commands you use most.
         tags: [Python, Notes]
         command: quick-capture --help
         repo: https://github.com/Midtown-Technology-Group/quick-capture
       - name: Detour
         id: detour
-        description: Track work detours in daily Markdown notes so side work stays visible.
+        description: Log unplanned detours in your daily Markdown notes so side work stays visible.
         tags: [CLI, Markdown]
         command: detour --help
         repo: https://github.com/Midtown-Technology-Group/detour
       - name: SOP Generator
         id: sop-generator
-        description: Turn Greenshot screenshot runs into step-by-step IT documentation.
+        description: Turn a run of Greenshot screenshots into step-by-step IT documentation.
         tags: [Python, Docs]
         command: sop-generator --help
         repo: https://github.com/Midtown-Technology-Group/sop-generator
       - name: Time Tracker
         id: time-tracker
-        description: Track task time with low friction for MSP work logs and daily-note evidence.
+        description: Track time on tasks with almost no friction, for MSP work logs and daily-note evidence.
         tags: [Python, CLI]
         command: time-tracker --help
         repo: https://github.com/Midtown-Technology-Group/time-tracker
       - name: GTD Dashboard
         id: gtd-dashboard
-        description: Unified task view across Logseq notes, including waiting-for aging analysis.
+        description: One task view across your Logseq notes, including how long items have been waiting.
         tags: [Python, GTD]
         command: gtd-dashboard --help
         repo: https://github.com/Midtown-Technology-Group/gtd-dashboard
       - name: Link Validator
         id: link-validator
-        description: Validate knowledge graph links and catch broken wiki-link references.
+        description: Check the knowledge graph for broken wiki-links before they pile up.
         tags: [Python, Quality]
         command: link-validator --help
         repo: https://github.com/Midtown-Technology-Group/link-validator
       - name: Topic Trends
         id: topic-trends
-        description: Analyze knowledge notes for topics that are heating up, cooling down, or expanding.
+        description: See which topics in your notes are heating up, cooling down, or expanding.
         tags: [Python, Analytics]
         command: topic-trends --help
         repo: https://github.com/Midtown-Technology-Group/topic-trends
       - name: Weekly Review
         id: weekly-review
-        description: Generate GTD weekly reviews from daily notes and work context.
+        description: Build your GTD weekly review from daily notes and work context.
         tags: [Python, Reports]
         command: weekly-review --help
         repo: https://github.com/Midtown-Technology-Group/weekly-review
 
   - name: Shared Plumbing
     id: plumbing
-    summary: Auth, sync, packaging, secure local support
+    summary: Auth, sync, packaging, and secure local support
     tools:
       - name: Shared Microsoft Auth
         id: mtg-microsoft-auth
-        description: Reusable WAM-first auth package for Graph tools with common cache behavior.
+        description: A reusable, WAM-first auth package for Graph tools, with shared token caching.
         tags: [MSAL, WAM]
         command: mtg-microsoft-auth
         repo: https://github.com/Midtown-Technology-Group/mtg-microsoft-auth
       - name: Context Sync
         id: context-sync
-        description: Mature graph-connected reference implementation for shared Microsoft 365 auth.
+        description: A mature, graph-connected reference implementation of shared Microsoft 365 auth.
         tags: [Python, Graph]
         command: work-context-sync --help
         repo: https://github.com/Midtown-Technology-Group/context-sync
       - name: Keeper PowerCommander Vault
         id: secretmanagementkeeperpowercommander
-        description: PowerShell SecretManagement vault backed by Keeper PowerCommander.
+        description: A PowerShell SecretManagement vault backed by Keeper PowerCommander.
         tags: [PowerShell, Keeper]
         command: Install-Module
         repo: https://github.com/Midtown-Technology-Group/SecretManagement.KeeperPowerCommander
-

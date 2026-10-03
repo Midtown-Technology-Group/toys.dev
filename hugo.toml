@@ -6,11 +6,11 @@ disableHugoGeneratorInject = true
 enableRobotsTXT = true
 
 [params]
-  description = 'A practical index of Windows-first CLIs, Microsoft 365 helpers, reporting utilities, and shared plumbing maintained in Midtown repos.'
+  description = 'The Windows-first CLIs and Microsoft 365 helpers we build and use at Midtown, plus the shared plumbing underneath them.'
   repo = 'https://github.com/Midtown-Technology-Group/toys.dev'
   company = 'Midtown Technology Group LLC'
   project = 'MTG / Instrument Catalog'
-  kicker = 'Midtown Technology Group / Instrument Catalog'
+  kicker = 'Midtown Technology Group'
   sheet = '01 of 01'
   drawnBy = 'MTG'
   authModel = 'WAM-first'
