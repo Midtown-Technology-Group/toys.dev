@@ -5,65 +5,48 @@ groups:
     tools:
       - name: Todo
         id: todo
-        initials: TD
-        accent: green
         description: Microsoft To Do companion built on shared auth, live-verified with WAM and delegated task scopes.
         tags: [Python, Tasks.Read]
         command: todo --help
         repo: https://github.com/Midtown-Technology-Group/todo
       - name: Mail Triage
         id: mail-triage
-        initials: MT
-        accent: blue
         description: Inbox triage with compact JSON output for notification and follow-up workflows.
         tags: [Python, Mail.ReadBasic]
         command: .\invoke.ps1 inbox
         repo: https://github.com/Midtown-Technology-Group/mail-triage
       - name: Calendar Glance
         id: calendar-glance
-        initials: CG
-        accent: blue
         description: Read-only agenda snapshots for short-range planning and meeting context.
         tags: [Python, Calendars.Read]
         command: .\invoke.ps1 agenda
         repo: https://github.com/Midtown-Technology-Group/calendar-glance
       - name: Communication Style
         id: communication-style
-        initials: CS
-        accent: teal
-        featured: true
         description: Build local style guides from Teams and Sent Items, including era and participant-focused cuts.
         tags: [Python, Teams, Mail]
         command: communication-style --help
         repo: https://github.com/Midtown-Technology-Group/communication-style
       - name: File Finder
         id: file-finder
-        initials: FF
-        accent: green
         description: Microsoft 365 file discovery and focused OneDrive actions through delegated Graph.
         tags: [Python, OneDrive]
         command: file-finder --help
         repo: https://github.com/Midtown-Technology-Group/file-finder
       - name: Halo CLI
         id: halocli
-        initials: HC
-        accent: amber
         description: Standalone HaloPSA command line workflows for safe operator and automation use.
         tags: [Python, HaloPSA]
         command: halocli --help
         repo: https://github.com/Midtown-Technology-Group/halocli
       - name: Meeting Cost Tracker
         id: meeting-cost-tracker
-        initials: MC
-        accent: teal
         description: Calculate the real cost of Teams meetings from participant time and hourly rates.
         tags: [Python, Analytics]
         command: meeting-cost-tracker --help
         repo: https://github.com/Midtown-Technology-Group/meeting-cost-tracker
       - name: Meeting Extractor
         id: meeting-extractor
-        initials: ME
-        accent: blue
         description: Extract decisions and action items from Microsoft Teams transcripts.
         tags: [Python, Teams]
         command: meeting-extractor --help
@@ -75,64 +58,48 @@ groups:
     tools:
       - name: Quick Capture
         id: quick-capture
-        initials: QC
-        accent: green
         description: Fast capture into notes and workflows with short command aliases intact.
         tags: [Python, Notes]
         command: quick-capture --help
         repo: https://github.com/Midtown-Technology-Group/quick-capture
       - name: Detour
         id: detour
-        initials: DT
-        accent: amber
         description: Track work detours in daily Markdown notes so side work stays visible.
         tags: [CLI, Markdown]
         command: detour --help
         repo: https://github.com/Midtown-Technology-Group/detour
       - name: SOP Generator
         id: sop-generator
-        initials: SG
-        accent: teal
         description: Turn Greenshot screenshot runs into step-by-step IT documentation.
         tags: [Python, Docs]
         command: sop-generator --help
         repo: https://github.com/Midtown-Technology-Group/sop-generator
       - name: Time Tracker
         id: time-tracker
-        initials: TT
-        accent: blue
         description: Track task time with low friction for MSP work logs and daily-note evidence.
         tags: [Python, CLI]
         command: time-tracker --help
         repo: https://github.com/Midtown-Technology-Group/time-tracker
       - name: GTD Dashboard
         id: gtd-dashboard
-        initials: GD
-        accent: green
         description: Unified task view across Logseq notes, including waiting-for aging analysis.
         tags: [Python, GTD]
         command: gtd-dashboard --help
         repo: https://github.com/Midtown-Technology-Group/gtd-dashboard
       - name: Link Validator
         id: link-validator
-        initials: LV
-        accent: amber
         description: Validate knowledge graph links and catch broken wiki-link references.
         tags: [Python, Quality]
         command: link-validator --help
         repo: https://github.com/Midtown-Technology-Group/link-validator
       - name: Topic Trends
         id: topic-trends
-        initials: TR
-        accent: teal
         description: Analyze knowledge notes for topics that are heating up, cooling down, or expanding.
         tags: [Python, Analytics]
         command: topic-trends --help
         repo: https://github.com/Midtown-Technology-Group/topic-trends
       - name: Weekly Review
         id: weekly-review
-        initials: WR
-        accent: blue
         description: Generate GTD weekly reviews from daily notes and work context.
         tags: [Python, Reports]
         command: weekly-review --help
@@ -144,25 +111,18 @@ groups:
     tools:
       - name: Shared Microsoft Auth
         id: mtg-microsoft-auth
-        initials: SA
-        accent: blue
-        featured: true
         description: Reusable WAM-first auth package for Graph tools with common cache behavior.
         tags: [MSAL, WAM]
         command: mtg-microsoft-auth
         repo: https://github.com/Midtown-Technology-Group/mtg-microsoft-auth
       - name: Context Sync
         id: context-sync
-        initials: CX
-        accent: teal
         description: Mature graph-connected reference implementation for shared Microsoft 365 auth.
         tags: [Python, Graph]
         command: work-context-sync --help
         repo: https://github.com/Midtown-Technology-Group/context-sync
       - name: Keeper PowerCommander Vault
         id: secretmanagementkeeperpowercommander
-        initials: KV
-        accent: amber
         description: PowerShell SecretManagement vault backed by Keeper PowerCommander.
         tags: [PowerShell, Keeper]
         command: Install-Module

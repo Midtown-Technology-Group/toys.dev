@@ -1,11 +1,14 @@
-<section class="tool-group" id="{{ .id }}" aria-labelledby="group-{{ .id }}">
-    <div class="group-heading">
-        <h3 id="group-{{ .id }}">{{ .name }}</h3>
-        <span>{{ .summary }}</span>
+{{- $group := .group -}}
+{{- $index := .index -}}
+<section class="tool-group" id="{{ $group.id }}" aria-labelledby="group-{{ $group.id }}">
+    <div class="group-head">
+        <span class="gid">{{ printf "%02d" $index }}</span>
+        <h3 id="group-{{ $group.id }}">{{ $group.name }}</h3>
+        <p>{{ $group.summary }}</p>
     </div>
-    <div class="tool-list">
-        {{- range .tools }}
-            {{ partial "tool-row.html" . }}
+    <ol class="tool-list">
+        {{- range $j, $tool := $group.tools }}
+            {{ partial "tool-row.html" (dict "tool" $tool "index" (add $j 1)) }}
         {{- end }}
-    </div>
+    </ol>
 </section>

@@ -2,8 +2,8 @@
 """Validate and render the catalog defined in data/tools.yaml.
 
 Subcommands:
-  validate        Check structure, unique group/tool ids, allowed accents,
-                  required fields, and repository URL prefix.
+  validate        Check structure, unique group/tool ids, required fields,
+                  and repository URL prefix.
   readme --check  Fail if the generated README catalog block is stale.
   readme --write  Rewrite the generated README catalog block in place.
 """
@@ -22,8 +22,7 @@ README_FILE = REPO_ROOT / "README.md"
 
 START_MARKER = "<!-- catalog:start -->"
 END_MARKER = "<!-- catalog:end -->"
-ALLOWED_ACCENTS = {"green", "blue", "teal", "amber"}
-REQUIRED_TOOL_FIELDS = ("name", "id", "initials", "accent", "description", "command", "repo")
+REQUIRED_TOOL_FIELDS = ("name", "id", "description", "command", "repo")
 REPO_PREFIX = "https://github.com/Midtown-Technology-Group/"
 ID_PATTERN = re.compile(r"[a-z0-9.-]+")
 
@@ -65,8 +64,6 @@ def validate() -> None:
             for field in REQUIRED_TOOL_FIELDS:
                 if not tool.get(field):
                     die(f"tool {name!r} is missing '{field}'")
-            if tool["accent"] not in ALLOWED_ACCENTS:
-                die(f"tool {name!r} has unknown accent {tool['accent']!r}")
             if not isinstance(tool.get("tags"), list) or not tool["tags"]:
                 die(f"tool {name!r} must have a non-empty 'tags' list")
             tool_id = tool["id"]

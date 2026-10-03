@@ -1,13 +1,11 @@
 {{ define "main" }}
 {{- $groups := hugo.Data.tools.groups -}}
 {{- $toolCount := 0 -}}
-{{- $graphCount := 0 -}}
 {{- range $groups -}}
     {{- $toolCount = add $toolCount (len .tools) -}}
-    {{- if eq .id "graph" -}}{{- $graphCount = len .tools -}}{{- end -}}
 {{- end -}}
 <main id="top" tabindex="-1">
-    {{ partial "hero.html" (dict "toolCount" $toolCount "graphCount" $graphCount) }}
+    {{ partial "hero.html" (dict "toolCount" $toolCount "groupCount" (len $groups)) }}
     {{ partial "catalog.html" (dict "groups" $groups) }}
     {{ partial "install.html" . }}
     {{ partial "standards.html" . }}

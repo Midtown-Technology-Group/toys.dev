@@ -1,15 +1,18 @@
 {{- $install := hugo.Data.install -}}
-<section class="install-band" id="install" aria-labelledby="install-title">
+<section class="install" id="install" aria-labelledby="install-title">
     <div class="section-heading">
-        <p class="eyebrow">{{ $install.eyebrow }}</p>
+        <p class="kicker">{{ $install.eyebrow }}</p>
         <h2 id="install-title">{{ $install.heading }}</h2>
         <p>{{ $install.intro }}</p>
     </div>
     <div class="install-grid">
-        {{- range $install.examples }}
-        <article>
-            <h3>{{ .title }}</h3>
-            <pre><code>{{ .code }}</code></pre>
+        {{- range $i, $example := $install.examples }}
+        <article class="install-card">
+            <div class="install-head">
+                <span class="gid">{{ printf "%02d" (add $i 1) }}</span>
+                <h3>{{ $example.title }}</h3>
+            </div>
+            <pre class="code"><code>{{ $example.code }}</code></pre>
         </article>
         {{- end }}
     </div>
