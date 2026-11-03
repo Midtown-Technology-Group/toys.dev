@@ -23,3 +23,12 @@ Verify File Finder permissions against its current source and documented operati
 ## Security
 
 `hugo.toml` denies external executables, remote fetches, and non-`HUGO_` environment access under `[security]`, and disables every embedded third-party template under `[privacy]`. Keep those restrictive unless a feature genuinely needs access; then add the narrowest allowlist entry or checksum instead of widening a rule globally.
+
+## Secret gate before publication
+
+Before every push and PR creation/update, commit the complete candidate and run
+`python3 scripts/secret_gate.py` (native Windows: `python`). Require exit 0;
+missing tooling/authentication, scan errors and skipped scans block publication.
+Then run the existing repository gates. Repeat after changing outgoing commits.
+See [secret scanning](SECRET-SCANNING.md) for base selection, new branches,
+pre-push input and prerequisites. Preserve GitGuardian App, CI and Gitleaks checks.
